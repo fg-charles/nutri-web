@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>student calculate</title>
+    <!-- link for font -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Righteous&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/3218191387.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="styles.css"
+    />
+  </head>
+  <body>
+    <!-- main html -->
+    <div class="topnav">
+      <ul>
+        <li id="title">Nutrition Cycle Calculator</li>
+        <li class="info-button">
+          <button type="button" onclick="toggleInfo()" style="cursor: pointer">
+            <i class="fa-solid fa-circle-info"></i>
+          </button>
+          <button type="button" onclick="openLogin()" style="cursor: pointer">
+            <i class="fa-solid fa-right-to-bracket"></i>
+          </button>
+        </li>
+      </ul>
+    </div>
+    <div class="info-section" id="info-section">
+      <div class="info-desc">
+        <p>
+          Do you eat the same thing every n number of days? If so, this tool
+          will let you find your average daily intake of nutrients and calories.
+          This way, you can check your diet for deficiencies and imbalances and
+          adjust accordingly!
+        </p>
+      </div>
+      <div class="info-list">
+        <p style="text-decoration: underline">Instructions:</p>
+        <ol type="1">
+          <li>
+            Enter the length of your nutrition cycle (in days) (default 1)
+          </li>
+          <li>
+            Add all the ingredients you eat within your cycle and provide
+            nutrition information. If left empty, a category will default to
+            zero.
+          </li>
+          <li>Click on "Get Nutrition Report".</li>
+        </ol>
+      </div>
+    </div>
+    <div class="form-popup" id="login-form">
+      <form action="/action_page.php" class="form-container">
+        <p class="header" style="margin: 10px" id="first-text">Login</p>
+
+        <label for="email">Email</label>
+        <input type="text" placeholder="Enter Email" id="email" required />
+
+        <label for="psw"> Password</label>
+        <input type="password" placeholder="Enter Password" id="psw" required />
+
+        <button type="submit" id="login-form-submit">Login</button>
+        <p style="font-size: 12px; padding-bottom: 5px" id="second-text">
+          No account?
+        </p>
+        <button type="button" onclick="switchRegister()">Register</button>
+      </form>
+    </div>
+    <div id="pers-info">
+      <p class="header">Your Info:</p>
+      <table>
+        <tr>
+          <td class="col1">Sex</td>
+          <td>
+            <label>
+              <input type="radio" name="sex" id="male" />
+              Male
+            </label>
+            <label>
+              <input type="radio" name="sex" id="female" />
+              Female
+            </label>
+          </td>
+        </tr>
+        <tr>
+          <td class="col1">Age</td>
+          <td>
+            <input type="number" id="age" min="1" />
+          </td>
+        </tr>
+        <tr>
+          <td class="col1">Weight</td>
+          <td>
+            <input type="number" id="weight" placeholder="lbs" min="1" />
+          </td>
+        </tr>
+        <tr>
+          <td class="col1">Height</td>
+          <td>
+            <select id="height">
+              <option value="55">4ft 7in</option>
+              <option value="56">4ft 8in</option>
+              <option value="57">4ft 9in</option>
+              <option value="58">4ft 10in</option>
+              <option value="59">4ft 11in</option>
+              <option value="60">5ft 0in</option>
+              <option value="61">5ft 1in</option>
+              <option value="62">5ft 2in</option>
+              <option value="63">5ft 3in</option>
+              <option value="64">5ft 4in</option>
+              <option value="65">5ft 5in</option>
+              <option value="66">5ft 6in</option>
+              <option value="67">5ft 7in</option>
+              <option value="68">5ft 8in</option>
+              <option value="69" selected="true">5ft 9in</option>
+              <option value="70">5ft 10in</option>
+              <option value="71">5ft 11in</option>
+              <option value="72">6ft 0in</option>
+              <option value="73">6ft 1in</option>
+              <option value="74">6ft 2in</option>
+              <option value="75">6ft 3in</option>
+              <option value="76">6ft 4in</option>
+              <option value="77">6ft 5in</option>
+              <option value="78">6ft 6in</option>
+              <option value="79">6ft 7in</option>
+              <option value="80">6ft 8in</option>
+              <option value="81">6ft 9in</option>
+              <option value="82">6ft 10in</option>
+              <option value="83">6ft 11in</option>
+              <option value="84">7ft 0in</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td class="col1">Activity</td>
+          <td>
+            <select id="activity">
+              <option value="1.2" selected="">Sedentary (office job)</option>
+              <option value="1.375">Light Exercise (1-2 days/week)</option>
+              <option value="1.55">Moderate Exercise (3-5 days/week)</option>
+              <option value="1.725">Heavy Exercise (6-7 days/week)</option>
+              <option value="1.9">Athlete (2x per day)</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="cycle-length">
+      <p class="header">Length of Cycle:</p>
+      <p>
+        <input
+          type="number"
+          id="length"
+          placeholder="days"
+          min="1"
+          class="input"
+        />
+      </p>
+    </div>
+
+    <div class="ingredient-sec">
+      <p class="header">Ingredients:</p>
+      <div class="ingredients-list" id="ingredients">
+        <button id="add-ingredient" onclick="addIngredient()">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+    </div>
+    <div class="report">
+      <input
+        type="button"
+        value="Get Nutrition Report"
+        class="form-button"
+        onclick="getAverage()"
+      />
+      <div class="showdata" id="showdata"></div>
+    </div>
+    <p id="test"></p>
+
+    <!--adding external javascript file-->
+    <script src="script.js"></script>
+  </body>
+</html>
